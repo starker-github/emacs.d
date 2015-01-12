@@ -486,7 +486,7 @@ With arg N, insert N newlines."
 (global-set-key (kbd"C-M-; c") 'insert-deb-textc)
 
 (require'linum)
-(global-linum-mode t)
+;(global-linum-mode t)
 (global-set-key "\M-n" 'linum-mode)
 
 (provide 'init-editing-utils)

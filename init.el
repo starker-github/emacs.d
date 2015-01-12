@@ -46,7 +46,7 @@
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-windows)
-;(require 'init-sessions)
+(require 'init-sessions)
 
 ;;;;;; editing ;;;;;;
 ;; (require 'init-flycheck)

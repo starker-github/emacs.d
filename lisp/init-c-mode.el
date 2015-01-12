@@ -8,7 +8,10 @@
                                 (setq tab-width 4) ;;4个缩进
                                 (setq indent-tabs-mode t)
                                 (setq c-basic-offset 4)
+                                (setq cscope-minor-mode t)
                                 (fci-mode 1)))
+(add-hook 'asm-mode-hook (lambda()
+                                (setq cscope-minor-mode t)))
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 
