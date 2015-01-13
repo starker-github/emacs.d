@@ -19,6 +19,8 @@
 (require 'window-numbering)
 (window-numbering-mode 1)
 
+(require 'windows)
+
 ;;----------------------------------------------------------------------------
 ;; When splitting window, show (other-buffer) in the new window
 ;;----------------------------------------------------------------------------

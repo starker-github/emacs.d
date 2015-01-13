@@ -1,6 +1,4 @@
-(require-package 'xcscope)
-(require 'xcscope)
-
+;;------------------------- google c style -------------------------------------------
 (require-package 'google-c-style)
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook (lambda ()

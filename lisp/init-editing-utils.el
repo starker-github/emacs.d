@@ -1,5 +1,7 @@
 (require-package 'unfill)
 
+(global-unset-key (kbd "C-SPC"))
+
 ;; 括号自动补全
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode))

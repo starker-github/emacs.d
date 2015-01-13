@@ -55,6 +55,8 @@
 (require 'init-editing-utils)
 (require 'init-bookmarks)
 
+(require 'init-cscope)
+
 (require 'init-c-mode)
 (require 'init-markdown)
 (require 'init-python-mode)
