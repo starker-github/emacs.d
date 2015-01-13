@@ -20,11 +20,31 @@
 (defun cscope-window-window (win)
   (get-buffer-window (window-buffer cscope-marker-window)))
 
+(defvar cscope-resume-ring-length 16
+  "Length of the cscope resume ring.")
+
+(defvar cscope-resume-ring (make-ring cscope-marker-ring-length)
+  "Ring of resumes which are locations from which cscope was invoked.")
+
+(defun cscope-pop-resume()
+  "Pop back to window when cscope was last invoked."
+  (if (ring-empty-p cscope-resume-ring)
+      (error "There are no resume list in the cscope-resume-ring yet"))
+  (let ((list (ring-remove cscope-resume-ring 0)))
+    (message "######## cscope-pop-resume: list: %s" list)
+    (if (and (listp list) (window-configuration-p (car list)) (markerp (nth 1 list)))
+        (progn
+          (message "    #### cscope-pop-resume: window-configuration is %s" (nth 0 list))
+          (message "    #### cscope-pop-resume: marker is %s" (nth 1 list))
+          (set-window-configuration (nth 0 list))
+          (goto-char (nth 1 list)))
+      (error "cscope-pop-resume: argrument is error!!!"))))
+
 (defun cscope-resume ()
   "resume where cscope was last invoked."
   (interactive)
-  (cscope-pop-mark)
-  (resume))
+  (cscope-pop-resume)
+  )
 
 ;; 修改cscope的显示方式
 ;; (add-to-list 'special-display-regexps '("*cscope*" cscope-display-buffers))
@@ -49,7 +69,6 @@
   (define-key map "\C-csr" 'cscope-pop-mark)
   (define-key map "\C-csu" 'cscope-resume)
   (setq cscope-minor-mode-keymap map))
-
 
 ;; fix cscope function
 (defun cscope-call (basemsg search-id symbol)
@@ -87,7 +106,8 @@ this is."
       (setq cscope-marker-window (get-buffer-window old-buffer))
       (setq cscope-marker (point-marker)))
     (message "========> cscope-call: cscope-marker-window - %s" cscope-marker-window)
-    (save-current-configuration)
+    (ring-insert cscope-resume-ring (list (current-window-configuration) (point-marker)))
+    (message "******** %s" 'cscop-resume-ring)
     (set-window-buffer (cscope-display-layout (cscope-window-window cscope-marker-window)) (get-buffer-create cscope-output-buffer-name))
     (with-current-buffer outbuf
       (if cscope-display-times
