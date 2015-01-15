@@ -98,9 +98,12 @@ Call a second time to restore the original window configuration."
 			(not (minibuffer-window-active-p other-window)))
 				(error "Minibuffer is inactive"))
 		        (t
-			        (let ( (old-buffer (window-buffer window)) )
-				        (set-window-buffer window (window-buffer other-window))
+                         (let ( (old-buffer (window-buffer window))
+                                (old-point  (window-point window)))
+                                  (set-window-buffer window (window-buffer other-window))
+                                  (set-window-point  window (window-point other-window))
 				        (set-window-buffer other-window old-buffer)
+				        (set-window-point  other-window old-point)
 				        (select-window other-window))))))
 
 (defun windmove-do-cover-window (dir &optional arg window)

@@ -17,6 +17,7 @@
  buffers-menu-max-size 30
  case-fold-search t
  column-number-mode t                   ;在modeline显示行号
+ which-function-mode t                  ;在modeline显示函数名
  delete-selection-mode t
  ediff-split-window-function 'split-window-horizontally ; ediff默认水平分隔
  ediff-window-setup-function 'ediff-setup-windows-plain
@@ -39,8 +40,6 @@
 (setq x-select-enable-clipboard t)
 ;; 当光标在行尾上下移动的时候，始终保持在行尾。
 (setq track-eol t)
-;; 显示当前函数名
-(setq witch-function-mode t)
 
 (global-auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t

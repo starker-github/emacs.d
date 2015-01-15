@@ -53,6 +53,7 @@
 (require 'init-hippie-expand)
 (require 'init-auto-complete)
 (require 'init-editing-utils)
+(require 'init-hs-minor-mode)
 (require 'init-bookmarks)
 
 (require 'init-cscope)
