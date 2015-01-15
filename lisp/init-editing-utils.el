@@ -111,7 +111,6 @@
 
 
 ;; 高亮当前光标所在的符号
-;; [BUG] 第一次highlight-symbol-at-point的单词,即使取消了高亮,颜色仍然不变.
 (require-package 'highlight-symbol)
 ;; (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
 ;;   (add-hook hook 'highlight-symbol-mode)
@@ -119,6 +118,11 @@
 ;; (eval-after-load 'highlight-symbol
 ;;   '(diminish 'highlight-symbol-mode))
 
+;; [BUG] 第一次highlight-symbol-at-point的单词,即使取消了高亮,颜色仍然不变.
+;; [原因] hi-lock.el中定义了(defalias 'highlight-symbol-at-point 'hi-lock-face-symbol-at-point)
+;;        导致其实调用的是hi-lock-face-symbol-at-point,所以需要require highlight-symbol重新定义
+;;        highlight-symbol-at-point
+(require 'highlight-symbol)
 (global-set-key (kbd"C-; C-;") 'highlight-symbol-at-point)
 (global-set-key (kbd"C-; C-n") 'highlight-symbol-next)
 (global-set-key (kbd"C-; C-p") 'highlight-symbol-prev)

@@ -41,8 +41,8 @@
 (eshell)
 (rename-buffer "note-shell")
 (eshell)
-(rename-buffer "work-shell")
-(eshell)
 (rename-buffer "tmp-shell")
+(eshell)
+(rename-buffer "work-shell")
 
 (provide 'init-misc)
