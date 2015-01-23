@@ -14,7 +14,8 @@
                            (hs-minor-mode 1)
                            ))
 
-(define-key global-map [f8] 'hs-toggle-hiding)
+(define-key global-map [f7] 'hs-toggle-hiding)
+(define-key global-map [f8] 'hs-show-all)
 
 ;;; hide ifdef
 (defun my-hif-toggle-block ()
@@ -40,6 +41,7 @@
     found))
 
 (add-hook 'c-mode-hook 'hide-ifdef-mode)
-(define-key global-map [f10] 'my-hif-toggle-block)
+(define-key global-map [f9]  'my-hif-toggle-block)
+(define-key global-map [f10] 'show-ifdefs)
 
 (provide 'init-hs-minor-mode)

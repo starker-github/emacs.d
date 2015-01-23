@@ -55,6 +55,7 @@
 (require 'init-editing-utils)
 (require 'init-hs-minor-mode)
 (require 'init-bookmarks)
+(require 'jumplist)
 
 (require 'init-cscope)
 
