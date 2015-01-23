@@ -44,7 +44,7 @@
 
 (defvar jl-skip-buffer
   '("*cscope*"
-    "*Messages"
+    "*Messages*"
     "*compilation*"
     )
   "Marker won't be set in these buffers.")

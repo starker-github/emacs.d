@@ -1,4 +1,6 @@
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(if (boundp 'server-base)
+    (add-to-list 'load-path (expand-file-name "lisp" server-base))
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory)))
 (require 'init-benchmarking) ;; Measure startup time，init-session中会用到
 
 ;;----------------------------------------------------------------------------
@@ -39,14 +41,16 @@
 ;;;;;; utils ;;;;;;
 (require 'init-isearch)
 (require 'init-grep)
-(require 'init-recentf)
 (require 'init-ido)
+(if (not (boundp 'server-base))
+    (progn
+      (require 'init-recentf)
+      (require 'init-sessions)))
 
 ;;;;;; buffer/windows ;;;;;;
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-windows)
-(require 'init-sessions)
 
 ;;;;;; editing ;;;;;;
 ;; (require 'init-flycheck)

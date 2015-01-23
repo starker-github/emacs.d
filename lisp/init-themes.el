@@ -40,8 +40,15 @@
 ;;------------------------------------------------------------------------------
 ;; sanityinc-tomorrow-eighties
 ;;------------------------------------------------------------------------------
-(add-to-list 'load-path (expand-file-name "lisp/custom-themes/color-theme-sanityinc-tomorrow/" user-emacs-directory))
-(load "~/.emacs.d/lisp/custom-themes/color-theme-sanityinc-tomorrow/sanityinc-tomorrow-eighties-theme.el")
+(if (boundp 'server-base)
+    (progn
+      (add-to-list 'load-path (expand-file-name "lisp/custom-themes/color-theme-sanityinc-tomorrow/" server-base))
+      (load (concat server-base "lisp/custom-themes/color-theme-sanityinc-tomorrow/sanityinc-tomorrow-eighties-theme.el"))
+      )
+  (add-to-list 'load-path (expand-file-name "lisp/custom-themes/color-theme-sanityinc-tomorrow/" user-emacs-directory))
+  (load (concat user-emacs-directory "lisp/custom-themes/color-theme-sanityinc-tomorrow/sanityinc-tomorrow-eighties-theme.el")))
+
+
 (require 'sanityinc-tomorrow-eighties-theme)
 
 (setq-default line-spacing 2)

@@ -71,20 +71,6 @@
           (lambda ()
             (setq line-spacing 0)))
 
-;; max size
-(defun maximized ()
-	(interactive)
-	(x-send-client-message
-		nil 0 nil "_NET_WM_STATE" 32
-		'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)
-	)
-	(x-send-client-message
-		nil 0 nil "_NET_WM_STATE" 32
-		'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)
-	)
-)
-(maximized)
-
 ;; display-time-mode in modeline
 (display-time-mode 1)
 ;; if the current character is `tab', strech the cursor
@@ -93,8 +79,5 @@
 (global-hl-line-mode 1)
 ;; title line %f-path, %p-percentage, %l-line
 (setq frame-title-format "%f")
-
-;; Setting font
-(set-default-font "Ubuntu Mono-12")
 
 (provide 'init-gui-frames)

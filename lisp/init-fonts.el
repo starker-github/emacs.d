@@ -50,4 +50,8 @@ by the :height face attribute."
 (global-set-key (kbd "C-M--") 'sanityinc/decrease-default-font-height)
 
 
+;; Setting font
+(if (not (boundp 'server-base))
+    (set-default-font "Ubuntu Mono-12"))
+
 (provide 'init-fonts)
