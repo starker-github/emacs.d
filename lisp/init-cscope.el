@@ -4,17 +4,17 @@
 
 (defun cscope-display-layout (win)
   "layout of cscope list"
-  (message "---- cscope-display-layout win: %s" win)
+  ;; (message "---- cscope-display-layout win: %s" win)
   (select-window win)
   (delete-other-windows)
-  (message "  -- cscope-display-layout window-1: %s" (selected-window))
+  ;; (message "  -- cscope-display-layout window-1: %s" (selected-window))
   (split-window-horizontally)
   (other-window 1)
-  (message "  -- cscope-display-layout window-2: %s" (selected-window))
+  ;; (message "  -- cscope-display-layout window-2: %s" (selected-window))
   (setq cscope-special-window (selected-window))
   (split-window-vertically)
   (other-window 1)
-  (message "  -- cscope-display-layout window-3: %s" (selected-window))
+  ;; (message "  -- cscope-display-layout window-3: %s" (selected-window))
   (selected-window))
 
 (defun cscope-window-window (win)
@@ -31,11 +31,11 @@
   (if (ring-empty-p cscope-resume-ring)
       (error "There are no resume list in the cscope-resume-ring yet"))
   (let ((list (ring-remove cscope-resume-ring 0)))
-    (message "######## cscope-pop-resume: list: %s" list)
+    ;; (message "######## cscope-pop-resume: list: %s" list)
     (if (and (listp list) (window-configuration-p (car list)) (markerp (nth 1 list)))
         (progn
-          (message "    #### cscope-pop-resume: window-configuration is %s" (nth 0 list))
-          (message "    #### cscope-pop-resume: marker is %s" (nth 1 list))
+          ;; (message "    #### cscope-pop-resume: window-configuration is %s" (nth 0 list))
+          ;; (message "    #### cscope-pop-resume: marker is %s" (nth 1 list))
           (set-window-configuration (nth 0 list))
           (goto-char (nth 1 list)))
       (error "cscope-pop-resume: argrument is error!!!"))))
@@ -105,9 +105,9 @@ this is."
           ;; was launched from.
       (setq cscope-marker-window (get-buffer-window old-buffer))
       (setq cscope-marker (point-marker)))
-    (message "========> cscope-call: cscope-marker-window - %s" cscope-marker-window)
+    ;; (message "========> cscope-call: cscope-marker-window - %s" cscope-marker-window)
     (ring-insert cscope-resume-ring (list (current-window-configuration) (point-marker)))
-    (message "******** %s" 'cscop-resume-ring)
+    ;; (message "******** %s" 'cscop-resume-ring)
     (set-window-buffer (cscope-display-layout (cscope-window-window cscope-marker-window)) (get-buffer-create cscope-output-buffer-name))
     (with-current-buffer outbuf
       (if cscope-display-times
@@ -161,11 +161,12 @@ Returns the window displaying BUFFER."
          (fuzzy-search-text-regexp (elt navprops 2))
          buffer old-pos old-point new-point forward-point backward-point
          line-end line-length)
-    (if (windowp window)
-        (message "========> cscope-show-entry-internal: %s" window)
-      (progn
-        (message "========> cscope-show-entry-internal: nil(%s)" cscope-special-window)
-        (setq window cscope-special-window)))
+    (if (not (windowp window))
+        (progn
+          ;; (message "========> cscope-show-entry-internal: nil(%s)" cscope-special-window)
+          (setq window cscope-special-window))
+      ;; (message "========> cscope-show-entry-internal: %s" window)
+      )
     (if (and (stringp file)
              (integerp line-number))
         (progn
