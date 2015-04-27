@@ -52,6 +52,9 @@ by the :height face attribute."
 
 ;; Setting font
 (if (not (boundp 'server-base))
-    (set-default-font "Ubuntu Mono-12"))
+    (progn
+      (set-default-font "Ubuntu Mono-12")
+      (setq default-frame-alist
+            (append '((font . "Ubuntu Mono-12")) default-frame-alist))))
 
 (provide 'init-fonts)

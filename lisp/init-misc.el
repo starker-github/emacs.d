@@ -3,6 +3,20 @@
 ;;----------------------------------------------------------------------------
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(require-package 'sr-speedbar)
+(require 'sr-speedbar)
+;; 左侧显示
+(setq sr-speedbar-right-side nil)
+;; 设置宽度
+(setq sr-speedbar-width 25)
+(global-set-key (kbd "C-<tab>") 'sr-speedbar-toggle)
+;; 不显示图标
+(setq speedbar-use-images nil)
+;; 自动刷新
+(setq sr-speedbar-auto-refresh t)
+;; inhibit tags grouping and sorting
+(setq speedbar-tag-hierarchy-method '(speedbar-simple-group-tag-hierarchy) )
+
 ;; **************************************************************************
 ;;; ***** built-in functions
 ;;; **************************************************************************

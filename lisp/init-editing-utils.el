@@ -17,7 +17,6 @@
  buffers-menu-max-size 30
  case-fold-search t
  column-number-mode t                   ;在modeline显示行号
- which-function-mode t                  ;在modeline显示函数名
  delete-selection-mode t
  ediff-split-window-function 'split-window-horizontally ; ediff默认水平分隔
  ediff-window-setup-function 'ediff-setup-windows-plain
@@ -32,6 +31,9 @@
  truncate-lines nil                      ;关闭拆行功能
  truncate-partial-width-windows nil
  visible-bell t)                         ;关闭响铃
+
+;; modeline显示函数名
+(which-function-mode)
 
 ;;页面平滑滚动， scroll-margin 3 靠近屏幕边沿3行时开始滚动，可以很好的看到上下文。
 (setq scroll-margin 5
@@ -76,6 +78,9 @@
 
 (global-set-key [remap just-one-space] 'cycle-spacing)
 (global-set-key (kbd "C-`") 'whitespace-cleanup)
+
+(require-package 'clean-aindent-mode)
+(clean-aindent-mode)
 
 
 ;;; Newline behaviour
@@ -233,7 +238,8 @@
 
 ;; goto char
 (require-package 'ace-jump-mode)
-(global-set-key (kbd "C-'") 'ace-jump-mode)
+(global-set-key (kbd "C-'") 'ace-jump-char-mode)
+(global-set-key (kbd "C-\"") 'ace-jump-word-mode)
 ;(global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
 
@@ -467,7 +473,7 @@ With arg N, insert N newlines."
   (interactive)
   (end-of-line nil)
   (indent-new-comment-line)
-  (insert "printk(\"######## {%s, %s, %d} ########\\n\", __FILE__, __func__, __LINE__);"))
+  (insert "printk(\"#### {%s, %s, %d} ####\\n\", __FILE__, __func__, __LINE__);"))
 ;;  (indent-region (line-beginning-position)
 ;;                 (line-end-position)))
 (global-set-key (kbd"C-M-; a") 'insert-deb-texta)
@@ -476,7 +482,7 @@ With arg N, insert N newlines."
   (interactive)
   (end-of-line nil)
   (indent-new-comment-line)
-  (insert "printk(\"========> {%s, %s, %d} <========\\n\", __FILE__, __func__, __LINE__);"))
+  (insert "printk(\"====> {%s, %s, %d} <====\\n\", __FILE__, __func__, __LINE__);"))
 ;;  (indent-region (line-beginning-position)
 ;;                 (line-end-position)))
 (global-set-key (kbd"C-M-; b") 'insert-deb-textb)
@@ -485,7 +491,7 @@ With arg N, insert N newlines."
   (interactive)
   (end-of-line nil)
   (indent-new-comment-line)
-  (insert "printk(\"******** {%s, %s, %d} ********\\n\", __FILE__, __func__, __LINE__);"))
+  (insert "printk(\"**** {%s, %s, %d} ****\\n\", __FILE__, __func__, __LINE__);"))
 ;;  (indent-region (line-beginning-position)
 ;;                 (line-end-position)))
 (global-set-key (kbd"C-M-; c") 'insert-deb-textc)

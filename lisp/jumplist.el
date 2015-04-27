@@ -61,9 +61,11 @@
 
 (defvar jl-skip-buffer
   '("*cscope*"
+    "*scratch*"
     "*Messages*"
     "*compilation*"
     "*Help*"
+    "*Ibuffer*"
     "*Minibuf-1*"
     "work-shell"
     "tmp-shell"
@@ -123,6 +125,14 @@
   (if (not (eq (current-buffer) (marker-buffer marker)))
       (switch-to-buffer (marker-buffer marker)))
   (goto-char (marker-position marker)))
+
+(defun jl-jump-clear()
+  (interactive)
+  (setq jl-cur-marker-pos -1)
+  (while (> (safe-length jl-marker-list) 0)
+    (progn
+      ;; (message "length = %d" (safe-length jl-marker-list))
+      (pop jl-marker-list))))
 
 (defun jl-jump-dump()
   (interactive)

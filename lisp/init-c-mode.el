@@ -3,9 +3,9 @@
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook (lambda ()
                                 (c-set-style "K&R")
-                                (setq tab-width 4) ;;4个缩进
+                                (setq tab-width 8) ;;8个缩进
                                 (setq indent-tabs-mode t)
-                                (setq c-basic-offset 4)
+                                (setq c-basic-offset 8)
                                 (setq cscope-minor-mode t)
                                 (fci-mode 1)))
 (add-hook 'asm-mode-hook (lambda()
