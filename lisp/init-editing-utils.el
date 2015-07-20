@@ -128,7 +128,8 @@
 ;;        导致其实调用的是hi-lock-face-symbol-at-point,所以需要require highlight-symbol重新定义
 ;;        highlight-symbol-at-point
 (require 'highlight-symbol)
-(global-set-key (kbd"C-; C-;") 'highlight-symbol-at-point)
+;(global-set-key (kbd"C-; C-;") 'highlight-symbol-at-point)
+(global-set-key (kbd"C-; C-;") 'highlight-symbol)
 (global-set-key (kbd"C-; C-n") 'highlight-symbol-next)
 (global-set-key (kbd"C-; C-p") 'highlight-symbol-prev)
 (global-set-key [f3] 'highlight-symbol-next)
@@ -136,7 +137,9 @@
 (global-set-key (kbd"C-; C-a") 'highlight-symbol-replace)
 (global-set-key (kbd"C-; C-r") 'highlight-symbol-query-replace)
 (global-set-key (kbd"C-; C-g") 'highlight-symbol-remove-all)
-(global-set-key (kbd"C-; C-s") 'hi-lock-line-face-buffer)
+;(global-set-key (kbd"C-; C-s") 'highlight-regexp)
+(global-set-key (kbd"C-; C-s") 'hi-lock-face-buffer)
+(global-set-key (kbd"C-; C-l") 'hi-lock-line-face-buffer)
 (global-set-key (kbd"C-; C-m") 'hi-lock-unface-buffer)
 
 ;;----------------------------------------------------------------------------

@@ -32,6 +32,11 @@
   (setq c-basic-offset 4))
 (global-set-key (kbd"C-c m c") 'c-code)
 
+;;------------------------- makefile mode -------------------------------------------
+(setq auto-mode-alist (cons '(".*\\.mak$" .
+                              makefile-mode) auto-mode-alist))
+
+;;------------------------- kconfig mode -------------------------------------------
 ;;; kconfig.el - a major mode for editing linux kernel config (Kconfig) files
 ;; Copyright © 2014 Yu Peng
 ;; Copyright © 2014 Michal Sojka

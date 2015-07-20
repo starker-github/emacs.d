@@ -62,6 +62,7 @@
 (require 'jumplist)
 
 (require 'init-cscope)
+(require 'init-compile)
 
 (require 'init-c-mode)
 (require 'init-markdown)
