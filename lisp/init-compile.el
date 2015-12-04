@@ -1,4 +1,5 @@
-(require-package 'smart-compile)
+;(require-package 'smart-compile)
+(require 'smart-compile)
 
 (global-set-key (kbd "<f12>") 'smart-compile)
 

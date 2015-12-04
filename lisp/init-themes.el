@@ -51,7 +51,7 @@
 
 (require 'sanityinc-tomorrow-eighties-theme)
 
-(setq-default line-spacing 2)
-(set-face-background 'region "SteelBlue4")
+;(setq-default line-spacing 2)
+;(set-face-background 'region "SteelBlue4")
 
 (provide 'init-themes)

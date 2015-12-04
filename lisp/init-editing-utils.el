@@ -79,8 +79,16 @@
 (global-set-key [remap just-one-space] 'cycle-spacing)
 (global-set-key (kbd "C-`") 'whitespace-cleanup)
 
-(require-package 'clean-aindent-mode)
+;(require-package 'clean-aindent-mode)
+(require 'clean-aindent-mode)
 (clean-aindent-mode)
+
+(defun pre-auto-indent()
+  (if (not (listp this-command))
+      (if (string= "newline-and-indent" this-command)
+       (c-indent-line-or-region))))
+
+(add-hook 'pre-command-hook 'pre-auto-indent)
 
 
 ;;; Newline behaviour
@@ -128,6 +136,18 @@
 ;;        导致其实调用的是hi-lock-face-symbol-at-point,所以需要require highlight-symbol重新定义
 ;;        highlight-symbol-at-point
 (require 'highlight-symbol)
+
+(defun highlight-symbol ()
+  "Toggle highlighting of the symbol at point.
+This highlights or unhighlights the symbol at point using the first
+element in of `highlight-symbol-faces'."
+  (interactive)
+  (let ((symbol (highlight-symbol-get-symbol)))
+    (unless symbol (error "No symbol at point"))
+    (if (highlight-symbol-symbol-highlighted-p symbol)
+        (highlight-symbol-remove-symbol symbol)
+      (highlight-symbol-add-symbol symbol))))
+
 ;(global-set-key (kbd"C-; C-;") 'highlight-symbol-at-point)
 (global-set-key (kbd"C-; C-;") 'highlight-symbol)
 (global-set-key (kbd"C-; C-n") 'highlight-symbol-next)
