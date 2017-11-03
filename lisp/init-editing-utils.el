@@ -1,3 +1,5 @@
+(require 'json-mode)
+(require 'json-reformat)
 (require-package 'unfill)
 
 (global-unset-key (kbd "C-SPC"))
@@ -196,7 +198,7 @@ element in of `highlight-symbol-faces'."
                     (progn
                      (kill-region (line-beginning-position)
                                   (line-end-position))
-		     (delete-char 1)
+                     (delete-char 1)
                      (message "killed line")))))
 
 ;; paste at next line
@@ -415,10 +417,10 @@ on the new line if the line would have been blank.
 With arg N, insert N newlines."
   (interactive "*p")
   (let* ((do-fill-prefix (and fill-prefix (bolp)))
-	 (do-left-margin (and (bolp) (> (current-left-margin) 0)))
-	 (loc (point-marker))
-	 ;; Don't expand an abbrev before point.
-	 (abbrev-mode nil))
+         (do-left-margin (and (bolp) (> (current-left-margin) 0)))
+         (loc (point-marker))
+         ;; Don't expand an abbrev before point.
+         (abbrev-mode nil))
     (delete-horizontal-space t)
     (newline n)
     (indent-according-to-mode)
@@ -427,8 +429,8 @@ With arg N, insert N newlines."
     (goto-char loc)
     (while (> n 0)
       (cond ((bolp)
-	     (if do-left-margin (indent-to (current-left-margin)))
-	     (if do-fill-prefix (insert-and-inherit fill-prefix))))
+             (if do-left-margin (indent-to (current-left-margin)))
+             (if do-fill-prefix (insert-and-inherit fill-prefix))))
       (forward-line 1)
       (setq n (1- n)))
     (goto-char loc)
@@ -542,5 +544,12 @@ With arg N, insert N newlines."
 (require'linum)
 ;(global-linum-mode t)
 (global-set-key "\M-n" 'linum-mode)
+
+(require-package 'cmake-mode)
+(require 'cmake-mode)
+(setq auto-mode-alist
+      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
+        ("\\.cmake\\'" . cmake-mode))
+          auto-mode-alist))
 
 (provide 'init-editing-utils)

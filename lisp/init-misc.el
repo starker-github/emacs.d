@@ -9,13 +9,19 @@
 (setq sr-speedbar-right-side nil)
 ;; 设置宽度
 (setq sr-speedbar-width 25)
-(global-set-key (kbd "C-<tab>") 'sr-speedbar-toggle)
+;(global-set-key (kbd "C-<tab>") 'sr-speedbar-toggle)
 ;; 不显示图标
 (setq speedbar-use-images nil)
 ;; 自动刷新
 (setq sr-speedbar-auto-refresh t)
 ;; inhibit tags grouping and sorting
 (setq speedbar-tag-hierarchy-method '(speedbar-simple-group-tag-hierarchy) )
+
+(require'imenu-list)
+(global-set-key (kbd "C-<tab>") 'imenu-list-minor-mode)
+(setq imenu-list-focus-after-activation t)
+(setq imenu-list-auto-resize t)
+(setq imenu-list-position 'left)
 
 ;; **************************************************************************
 ;;; ***** built-in functions
@@ -44,6 +50,7 @@
 (make-local-variable 'scroll-margin)
 (setq scroll-margin 0))
 (add-hook 'eshell-mode-hook 'eshell-scroll-conservatively)
+
 (eshell)
 (rename-buffer "aaaa-shell")
 (eshell)
@@ -52,8 +59,6 @@
 (rename-buffer "cccc-shell")
 (eshell)
 (rename-buffer "dddd-shell")
-(eshell)
-(rename-buffer "note-shell")
 (eshell)
 (rename-buffer "tmp-shell")
 (eshell)
