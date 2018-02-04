@@ -269,13 +269,16 @@ element in of `highlight-symbol-faces'."
 
 
 (require-package 'multiple-cursors)
+(setq mc/insert-numbers-default 1)
 ;; multiple-cursors
 ;; 多行编辑: 先选定一个区域,然后调用mark-previous/next-like-this方法,
 ;; 就会找到相似的位置,可以同时进行编辑
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-+") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M->") 'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-:") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 ;; From active region to multiple cursors:
 (global-set-key (kbd "C-c c r") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-c c c") 'mc/edit-lines)
@@ -319,7 +322,7 @@ element in of `highlight-symbol-faces'."
       (set (make-local-variable 'whitespace-style) '(face trailing))
       (whitespace-mode 1)))
 
-  ;;(add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
+  (add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
 
   (defun sanityinc/fci-enabled-p ()
     (and (boundp 'fci-mode) fci-mode))
@@ -345,7 +348,7 @@ element in of `highlight-symbol-faces'."
         (when (sanityinc/fci-enabled-p)
           (turn-on-fci-mode))))))
 
-(setq-default fill-column 100)
+(setq-default fill-column 120)
 (require 'fill-column-indicator)
 
 ;;----------------------------------------------------------------------------
@@ -525,7 +528,7 @@ With arg N, insert N newlines."
   (interactive)
   (end-of-line nil)
   (indent-new-comment-line)
-  (insert "/* TODO-tjiang:  */")
+  (insert "/* TODO (tjiang):  */")
   (left-char)
   (left-char)
   (left-char))
@@ -535,7 +538,7 @@ With arg N, insert N newlines."
   (interactive)
   (end-of-line nil)
   (indent-new-comment-line)
-  (insert "/* FIXME-tjiang:  */")
+  (insert "/* FIXME (tjiang):  */")
   (left-char)
   (left-char)
   (left-char))
@@ -543,7 +546,7 @@ With arg N, insert N newlines."
 
 (require'linum)
 ;(global-linum-mode t)
-(global-set-key "\M-n" 'linum-mode)
+(global-set-key "\C-\M-n" 'linum-mode)
 
 (require-package 'cmake-mode)
 (require 'cmake-mode)
@@ -551,5 +554,11 @@ With arg N, insert N newlines."
       (append '(("CMakeLists\\.txt\\'" . cmake-mode)
         ("\\.cmake\\'" . cmake-mode))
           auto-mode-alist))
+
+(require-package 'indent-guide)
+(require 'indent-guide)
+(indent-guide-global-mode t)
+(setq indent-guide-delay 0.1)
+;(setq indent-guide-recursive t)
 
 (provide 'init-editing-utils)

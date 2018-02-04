@@ -1,36 +1,48 @@
 ;;------------------------- google c style -------------------------------------------
 (require-package 'google-c-style)
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook (lambda ()
-                                (c-set-style "K&R")
-                                (setq tab-width 8) ;;8个缩进
-                                (setq indent-tabs-mode t)
-                                (setq c-basic-offset 8)
-                                (setq cscope-minor-mode t)
-                                (fci-mode 1)))
+;;------------------------- k&R code mode --------------------------------------------
+(defun c-k&r-hook()
+  (interactive)
+  (c-set-style "K&R")
+  (setq tab-width 8) ;;8个缩进
+  (setq indent-tabs-mode t)
+  (setq c-basic-offset 8)
+  (setq cscope-minor-mode t)
+  (fci-mode 1))
+;;------------------------- my c++ mode -------------------------------------------------
+(defun my-c++-mode-hook()
+  (interactive)
+  (google-set-c-style)
+  (setq tab-width 4 indent-tabs-mode nil)
+  (setq c-basic-offset 4)
+  (setq cscope-minor-mode t)
+  (c-set-offset 'case-label 0)
+  (c-set-offset 'topmost-intro-cont 0 nil)
+  (fci-mode 1))
+;;------------------------- my google mode -------------------------------------------------
+(defun my-google-c-mode-hook()
+  (interactive)
+  (google-set-c-style)
+  (setq cscope-minor-mode t)
+  (fci-mode 1))
+(setq-default indent-tabs-mode nil)
+;;------------------------- c/c++ mode -----------------------------------------------
 (add-hook 'asm-mode-hook (lambda()
                                 (setq cscope-minor-mode t)))
 (add-hook 'makefile-mode-hook (lambda()
                                 (setq cscope-minor-mode t)))
+;(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+;(add-hook 'c++-mode-hook 'my-google-c-mode-hook)
+(add-hook 'c-mode-hook 'c-k&r-hook)
+(add-hook 'c-mode-common-hook 'my-google-c-mode-hook)
+;(add-hook 'c-mode-common-hook 'my-c++-mode-hook)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
 
-;;------------------------- google code mode(space, 4 width, 4 c basic offset) -------------------------------------------
-(defun google-code()
-  (interactive)
-  (princ "google coe mode: 4 tab-width 4 c-basic-offset")
-  (setq indent-tabs-mode nil)
-  (setq tab-width 4)
-  (setq c-basic-offset 4))
-(global-set-key (kbd"C-c m g") 'google-code)
-;;------------------------- c code mode(space, 4 width, 4 c basic offset) -------------------------------------------
-(defun c-code()
-  (interactive)
-  (princ "c coe mode: 4 tab-width 4 c-basic-offset")
-  (setq indent-tabs-mode t)
-  (setq tab-width 4)
-  (setq c-basic-offset 4))
-(global-set-key (kbd"C-c m c") 'c-code)
+(global-set-key (kbd"C-c m c") 'c-k&r-hook)
+(global-set-key (kbd"C-c m m") 'my-c++-mode-hook)
 
 ;;------------------------- makefile mode -------------------------------------------
 (setq auto-mode-alist (cons '(".*\\.mak$" .
