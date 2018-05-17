@@ -3,7 +3,7 @@
 ;;----------------------------------------------------------------------------
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;(require-package 'sr-speedbar)
+(require-package 'sr-speedbar)
 (require 'sr-speedbar)
 ;; 左侧显示
 (setq sr-speedbar-right-side nil)
